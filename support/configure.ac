@@ -20,8 +20,9 @@ dnl
 dnl Process this file with autoconf to produce a configure script.
 dnl
 
-AC_INIT(../sasm/sasm.c)
-AC_CONFIG_HEADER(config.h)
+AC_INIT
+AC_CONFIG_SRCDIR([../sasm/sasm.c])
+AC_CONFIG_HEADERS([config.h])
 
 dnl
 dnl Version of a HP Tools ...
@@ -71,14 +72,12 @@ fi
 dnl
 dnl Handle AIX
 dnl
-AC_AIX
+AC_USE_SYSTEM_EXTENSIONS
 
 dnl
 dnl Checks for header files.
 dnl
-AC_HEADER_STDC
 AC_CHECK_HEADERS(unistd.h string.h sys/time.h errno.h dos.h)
-AC_HEADER_TIME
 
 dnl
 dnl Checks for typedefs, structures, and compiler characteristics.
@@ -90,7 +89,6 @@ AC_STRUCT_TM
 dnl
 dnl Return type of signal-handlers
 dnl
-dnl AC_TYPE_SIGNAL
 
 dnl
 dnl Checks for library functions.
@@ -114,14 +112,15 @@ dnl
 dnl Check for sys_errlist declaration
 dnl
 AC_MSG_CHECKING(for sys_errlist declaration)
-AC_TRY_RUN([
+AC_RUN_IFELSE([AC_LANG_SOURCE([[
 #include <sys/types.h>
 #include <stdio.h>
 #include <errno.h>
 main() { char *s = sys_errlist[0]; exit(0); }
-],AC_DEFINE(SYS_ERRLIST_DECLARED) AC_MSG_RESULT(yes), AC_MSG_RESULT(no), :)
+]])],[AC_DEFINE(SYS_ERRLIST_DECLARED) AC_MSG_RESULT(yes)],[AC_MSG_RESULT(no)],[:])
 
 dnl
 dnl Create output
 dnl
-AC_OUTPUT(Makefile version.c.SH)
+AC_CONFIG_FILES([Makefile version.c.SH])
+AC_OUTPUT
