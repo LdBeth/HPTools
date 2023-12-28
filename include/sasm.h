@@ -317,6 +317,13 @@ typedef struct imacro {
 #define FS_B 6
 #define FS_W 7
 #define FS_A 15
+#define FS_F1 8
+#define FS_F2 9
+#define FS_F3 10
+#define FS_F4 11
+#define FS_F5 12
+#define FS_F6 13
+#define FS_F7 14
 #define FS_BAD -1
 
 /* Support for the previous GNU Tools */

@@ -75,9 +75,16 @@ static struct fs {
   { "X", FS_X },
   { "S", FS_S },
   { "M", FS_M },
-  {  "B", FS_B },
+  { "B", FS_B },
   { "W", FS_W },
   { "A", FS_A },
+  { "F1", FS_F1 },
+  { "F2", FS_F2 },
+  { "F3", FS_F3 },
+  { "F4", FS_F4 },
+  { "F5", FS_F5 },
+  { "F6", FS_F6 },
+  { "F7", FS_F7 },
   { "", FS_BAD }
 };
 
