@@ -51,7 +51,7 @@ int addingmacro;
 int reading, begin_pseudos_ok; /* END sets reading == FALSE */
 int rel_expressions_ok = FALSE, quote_ok = TRUE;
 int linewidth = 5, codewidth = 5, source_col;
-int code_level = LEVEL2;
+int code_level = LEVEL3;
 int force_global = FALSE;
 int pass1, pass2;
 int verbose = FALSE;
@@ -225,7 +225,7 @@ void sasmusage()
   (void) fprintf(stderr,
 		 "-o objfile	write the object file to objfile [default=<name>.o]\n");
   (void) fprintf(stderr,
-		 "-P codetype	set processor (0=1LF2, 1=1LK7, 2=1LR2 [default=%d])\n",
+		 "-P codetype	set processor (0=1LF2, 1=1LK7, 2=1LR2, 3=ARM [default=%d])\n",
 		 code_level / LEVEL1);
   (void) fprintf(stderr,
 		 "-p pagelen	do a page break each 'pagelen' lines [default=%d]\n",
@@ -1736,6 +1736,7 @@ int main(int argc, char **argv)
     /* Add processor-related symbols to symbol table */
     if (code_level >= LEVEL3) {
       (void) addsymbol("*LEVEL3", (i_32) 1, S_RESOLVED | S_SETPASS2);
+      (void) addsymbol("*ARM", (i_32) 1, S_RESOLVED | S_SETPASS2);
     }
     if (code_level >= LEVEL2) {
       (void) addsymbol("*LEVEL2", (i_32) 1, S_RESOLVED | S_SETPASS2);
