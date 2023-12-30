@@ -1689,15 +1689,18 @@ OPCODEPTR getopcode(char *mnem_in)
 		
   case OPD_FS:
   case OPD_PARTIAL_FS:
+    if ((field = getfs()) == FS_BAD || *ptr == ','
+        || (((entry->op_flags & LEVELBITS) < LEVEL3)
+            && field >= FS_F1 && field <= FS_F7))
+      errmsg("Illegal field select");
     /* op_fs_nib is location of FS nibble in opcode */
-    if ((field = getfs()) != FS_BAD && *ptr != ',') {
+    else {
       if (entry->op_operand == OPD_PARTIAL_FS
 	  && (field==FS_P||field==FS_XS||field==FS_S||field==FS_WP)) {
 	warningmsg("Opcode buggy if overflow");
       }
       setfield(field);
-    } else
-      errmsg("Illegal field select");
+    }
     break;
   case OPD_D_OR_FS:
     /* op_fs_nib is location of FS/offset is digit nibble in opcode */
